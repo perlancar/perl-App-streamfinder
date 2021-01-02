@@ -9,6 +9,8 @@ use 5.010001;
 use strict;
 use warnings;
 
+use Perinci::Object;
+
 our %SPEC;
 
 $SPEC{app} = {
@@ -49,7 +51,7 @@ sub app {
         }
         my @streams = $station->get;
         for my $j (0..$#streams) {
-            $env->add_result(200, "OK", {payload=>{
+            $envres->add_result(200, "OK", {payload=>{
                 url=>$url,
                 stream_num=>$j+1,
                 num_streams=>scalar(@streams),
@@ -63,8 +65,9 @@ sub app {
     }
 
     my $res = $envres->as_struct;
+    $res->[2] //= [];
     if (!$args{detail} && @{ $args{urls} } == 1 && @{ $res->[2] } == 1) {
-        $res->[2] = $res->[2]{stream_url};
+        $res->[2] = $res->[2][0]{stream_url};
     }
     $res;
 }
