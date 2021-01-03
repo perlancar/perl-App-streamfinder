@@ -18,6 +18,20 @@ $SPEC{app} = {
     summary => 'CLI for StreamFinder, a module to fetch actual raw streamable URLs from video & podcasts sites',
     description => <<'_',
 
+Examples:
+
+    % streamfinder https://www.youtube.com/watch?v=6yVIKvcPa6Q
+    https://r5---sn-htgx20capjpq-jb3l.googlevideo.com/videoplayback?exp...
+
+    % streamfinder https://www.youtube.com/watch?v=6yVIKvcPa6Q -l
+    +--------------+------------------------- ...+-------+-------------+------------+--------------...+-----------...+-------------------------...+
+    | artist       | description                 | genre | num_streams | stream_num | stream_url      | title        | url                        |
+    +--------------+------------------------- ...+-------+-------------+------------+--------------...+-----------...+-------------------------...+
+    | Powerful JRE | Another hilarious moment ...|       | 1           | 1          | https://r5---...| Pinky And ...| https://www.youtube.com/...|
+    +--------------+--------------------------...+-------+-------------+------------+--------------...+-----------...+-------------------------...+
+
+    % streamfinder https://www.youtube.com/watch?v=6yVIKvcPa6Q https://www.youtube.com/watch?v=6yzVtlUI02w --json
+    ...
 
 _
     args => {
