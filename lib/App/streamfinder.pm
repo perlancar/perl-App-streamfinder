@@ -8,6 +8,7 @@ package App::streamfinder;
 use 5.010001;
 use strict;
 use warnings;
+use Log::ger;
 
 use Perinci::Object;
 
@@ -65,9 +66,16 @@ sub app {
     }
 
     my $res = $envres->as_struct;
+    #log_trace "%s", $res;
     $res->[2] //= [];
-    if (!$args{detail} && @{ $args{urls} } == 1 && @{ $res->[2] } == 1) {
-        $res->[2] = $res->[2][0]{stream_url};
+    if (@{ $args{urls} } == 1 && @{ $res->[2] } == 1) {
+        if ($args{detail}) {
+            # return a hash
+            $res->[2] = $res->[2][0];
+        } else {
+            # return a single url string
+            $res->[2] = $res->[2][0]{stream_url};
+        }
     }
     $res;
 }
