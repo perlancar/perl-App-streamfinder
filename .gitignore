@@ -2,3 +2,4 @@ App-streamfinder-*
 .build
 *~
 nytprof*
+.DS_Store
